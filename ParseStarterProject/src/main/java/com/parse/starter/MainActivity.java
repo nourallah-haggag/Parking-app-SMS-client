@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -164,6 +165,10 @@ public class MainActivity extends AppCompatActivity implements MessageListener {
                 public void done(ParseException e) {
                   if(e == null)
                   {
+
+                    // auto-reply
+                    SmsManager smgr = SmsManager.getDefault();
+                    smgr.sendTextMessage(sender,null,"Your request has been received successfully , a staff member will come to your assistance shortly  (Parking Valet)",null,null);
 
                   }
                   else {

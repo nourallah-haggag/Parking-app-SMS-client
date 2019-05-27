@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
@@ -100,6 +101,14 @@ public class SmsService extends Service {
                                         if(e == null)
                                         {
 
+                                            // at that point the sender request is saved successfully
+                                            // we will send an auto-reply to the user now
+
+                                            // auto-reply
+                                            SmsManager smgr = SmsManager.getDefault();
+                                            smgr.sendTextMessage(sender,null,"Your request has been received successfully , a staff member will come to your assistance shortly  (Parking Valet)",null,null);
+
+
                                         }
                                         else {
                                             object.saveEventually();
@@ -126,6 +135,7 @@ public class SmsService extends Service {
     public void onDestroy() {
         super.onDestroy();
     }
+
 
 
 }
